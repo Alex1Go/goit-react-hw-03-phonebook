@@ -4,6 +4,7 @@ import { ContactForm } from "./ContactForm/ContactForm";
 import { Filter } from "./Filter/Filter";
 import { ContactList } from "./ContactList/ContactList";
 
+import css from './App.module.css'
 
 export class App extends Component {
   state = {
@@ -51,7 +52,7 @@ export class App extends Component {
     const realItemContacts = contacts.filter(contact => contact.name.toLowerCase().includes(this.state.filter));
 
     return (
-      <div style={{ width: 400, marginLeft: 400 }}>
+      <div className={css.phone}>
         <Title title="Phonebook" />
         <ContactForm onAdd={this.addContact} />
         <Title title="Contacts" />
