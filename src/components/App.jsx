@@ -18,6 +18,21 @@ export class App extends Component {
   
   };
 
+  componentDidMount() { 
+    const savedContacts = localStorage.getItem('phone-contact');
+    if (savedContacts !== null) {
+      this.setState({
+        contacts: JSON.parse(savedContacts),
+      });
+    }
+  };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.contacts !== this.state.contacts) {
+      localStorage.setItem('phone-contact', JSON.stringify(this.state.contacts))
+    }
+   };
+
   addContact = newContact => {
     const isExist = this.state.contacts.find(contact => contact.name.toLowerCase() === newContact.name.toLowerCase());
     if (isExist) {
@@ -38,7 +53,6 @@ export class App extends Component {
     });
   };
 
-
   deleteContact = contactId => {
     this.setState(prevState => {
       return {
@@ -48,6 +62,7 @@ export class App extends Component {
   };
 
   render() {
+    console.log('render')
     const { contacts } = this.state;
     const realItemContacts = contacts.filter(contact => contact.name.toLowerCase().includes(this.state.filter));
 
